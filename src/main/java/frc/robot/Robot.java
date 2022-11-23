@@ -57,6 +57,12 @@ public class Robot extends TimedRobot {
   //schedule commands for what the robot should do after auto period ends
   @Override
   public void teleopInit() {
+    new SequentialCommandGroup(
+      new DriveCommand(m_robotContainer.drivetrainSubsystem.drive(0, 1, 1, JoystickScaling.LINEAR, 4, Constants.DriveStyle.CUSTOM_TANK).withTimeout(5),
+      new DriveCommand(m_robotContainer.drivetrainSubsystem.drive(0, 1, 1, JoystickScaling.LINEAR, 4, Constants.DriveStyle.NORMAL_ARCADE).withTimeout(5),
+      new DriveCommand(m_robotContainer.drivetrainSubsystem.drive(0, 1, 1, JoystickScaling.LINEAR, 4, Constants.DriveStyle.SATURATED_ARCADE).withTimeout(5),
+      new DriveCommand(m_robotContainer.drivetrainSubsystem.drive(0, 1, 1, JoystickScaling.LINEAR, 4, Constants.DriveStyle.ARCADE_TANK).withTimeout(5)
+    );
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();

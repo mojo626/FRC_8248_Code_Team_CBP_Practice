@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   //instantiate subsystems and commands
   private final ArmSubsystem armSubsystem = new ArmSubsystem();
-  private final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
+  public final DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
   private final BallHandlerSubsystem ballHandlerSubsystem = new BallHandlerSubsystem();
 
   //auto stuff
@@ -57,8 +57,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-  
-
+    Joystick operatorStick = oi.getOperatorStick();
+    JoystickButton button9 = new JoystickButton(operatorStick, 9);
+    JoystickButton button5 = new JoystickButton(operatorStick, 5);
+    button9.whenPressed(new SequentialCommandGroup(new DriveForTime(drivetrainSubsystem, 3, 1, 0, 1), new MoveArmCommand(armSubsystem, false), new IntakeBallCommand(ballHandlerSubsystem, 1, true, false, false), new SpinCommand(drivetrainSubsystem)));
+    button5.whenPressed(new SequentialCommandGroup(new ParallelRaceGroup(new BallHandlerSubsystem(ballHandlerSubsystem, 1, true, false, false), new WaitCommand(1)), new RandomTrajectoryGeneratorCommand(drivetrainSubsystem))); //What to do for filePath?
   }
 
   

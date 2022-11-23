@@ -32,6 +32,9 @@ public final class Constants {
 
 
    public static final class DriveConstants {
+      //103.6695
+      //55.547
+      //1.8663 rotations
 
     public static final double WHEEL_RADIUS = Units.inchesToMeters(3); //our wheels have a radius of 3 inches
     public static final double WHEEL_CIRCUMFERENCE = WHEEL_RADIUS * 2 * Math.PI;
